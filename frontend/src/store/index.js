@@ -1,11 +1,13 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import axios from 'axios'
+
+import auth from './modules/auth'
+import book from './modules/book'
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  state: {
+  /*state: {
   	isLogged: false,
     user: null,
   	book: null,
@@ -110,7 +112,11 @@ export default new Vuex.Store({
   		})
   	},
 
-  },
+  },*/
+
   modules: {
+    auth,
+    book
   },
+
 });

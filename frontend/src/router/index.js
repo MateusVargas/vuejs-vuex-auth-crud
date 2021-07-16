@@ -67,7 +67,7 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to,from,next)=>{
-  if (to.matched.some(record=>record.meta.auth) && !store.state.isLogged) {
+  if (to.matched.some(record=>record.meta.auth) && !store.state.auth.isLogged) {
     next('/login')
     return
   }
