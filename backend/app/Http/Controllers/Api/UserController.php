@@ -48,7 +48,6 @@ class UserController extends Controller
     	}
 
     	$response = [
-            'user' => Auth::user(),
     		'success' => $success,
     		'message' => $message
     	];

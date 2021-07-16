@@ -23,13 +23,11 @@ export default new Vuex.Store({
   	setUserData(state,userData){
   		state.isLogged = true
       state.user = userData
-      localStorage.setItem('user',JSON.stringify(userData))
   	},
 
   	clearUserData(state){
   		state.isLogged = false
       state.user = null
-      localStorage.removeItem('user')
   	},
 
   	setBooks(state,books){
@@ -55,23 +53,31 @@ export default new Vuex.Store({
   },
 
   actions: {
-  	async login({commit},credentials){
+  	async login({dispatch},credentials){
       await axios.get('/sanctum/csrf-cookie')
   		await axios.post('/login',credentials).then(response=>{
         if (response.data.success) {
-          commit('setUserData',response.data.user)
+          return dispatch('getUser')
         }
   		})
   	},
 
-  	async logout({commit}){
+  	async logout({dispatch}){
       await axios.get('/sanctum/csrf-cookie')
       await axios.post('/logout').then(response=>{
         if (response.data.success) {
-          commit('clearUserData')
+          return dispatch('getUser')
         }
       })
   	},
+
+    async getUser({commit}){
+      return await axios.get('/user').then(response=>{
+        commit('setUserData',response.data)
+      }).catch(()=>{
+        commit('clearUserData')
+      })
+    },
 
   	async fetchAllBooks({commit}){
   		await axios.get('/books').then(resp=>{

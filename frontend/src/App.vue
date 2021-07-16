@@ -9,22 +9,29 @@
 
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-			        <li class="nav-item" v-if="!isLogged">
-			          <router-link class="nav-link" aria-current="page" to="/login">Login</router-link>
-			        </li>
-			        <li class="nav-item" v-if="!isLogged">
-			          <router-link class="nav-link" to="/register">Register</router-link>
-			        </li>
 
-			        <li class="nav-item" v-if="isLogged">
-			          <router-link class="nav-link" aria-current="page" to="/dashboard">Dashboard</router-link>
-			        </li>
-			        <li class="nav-item" v-if="isLogged">
-			          <router-link class="nav-link" to="/books">Books</router-link>
-			        </li>
-			        <li class="nav-item" v-if="isLogged">
-			          <a href="#" class="nav-link" @click="logout">Logout</a>
-			        </li>
+			      	<template v-if="isLogged">
+			      		<li class="nav-item">
+				          <router-link class="nav-link" aria-current="page" to="/dashboard">Dashboard</router-link>
+				        </li>
+				        <li class="nav-item">
+				          <router-link class="nav-link" to="/books">Books</router-link>
+				        </li>
+				        <li class="nav-item">
+				          <a href="#" class="nav-link" @click="logout">Logout</a>
+				        </li>
+			      	</template>
+
+			      	<template v-else>
+				        <li class="nav-item">
+				          <router-link class="nav-link" aria-current="page" to="/login">Login</router-link>
+				        </li>
+				        <li class="nav-item">
+				          <router-link class="nav-link" to="/register">Register</router-link>
+				        </li>
+				    </template>
+
+			        
 			      </ul>
 			    </div>
 			</div>
